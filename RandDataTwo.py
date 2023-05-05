@@ -75,17 +75,22 @@ with open("NewData.csv") as file:
         pairs.append(f'{d1},{d2}')
         out50a.append(d1)
         out50s.append(d2)
-    print(pairs)
+    # print(pairs)
         # print(i,d1, d2)
 # print(out50a, out50s)
 
-n = int(len(pairs)*.5) #50% of the TextureData
-d = np.random.choice(pairs, n, False) 
-sumA = 0 
-sumBA = 0
-for i in range(len(d)):
-    sumA += float(d[i].split(',')[1])
-    sumBA += float(d[i].split(',')[1]) * float(d[i].split(',')[0])
-    Wave = sumBA/sumA
-print('sumA',sumA,'sumBA', sumBA)
-print('Weighted Average', Wave)
+def WA(fraction, pairs):
+    n = int(len(pairs)*fraction) #50% of the TextureData
+    d = np.random.choice(pairs, n, False) 
+    sumA = 0 
+    sumBA = 0
+    for i in range(len(d)):
+        sumA += float(d[i].split(',')[1])
+        sumBA += float(d[i].split(',')[1]) * float(d[i].split(',')[0])
+        Wave = sumBA/sumA
+    return Wave
+for i in range(20):
+    x = WA(.5, pairs)
+    print(x)
+# print('sumA',sumA,'sumBA', sumBA)
+# print('Weighted Average', Wave)
